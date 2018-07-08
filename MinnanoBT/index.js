@@ -4,6 +4,8 @@ const axios = require('axios');
 const csv = require('csv');
 const fs = require('fs');
 
+
+
 (async function() {
 	const { data } = await axios.get('https://cc.minkabu.jp/api/bar/BTC-JPY.json?range=30m&limit=48');
 	//const stringifier = csv.stringify();
@@ -15,7 +17,7 @@ const fs = require('fs');
 			closeBid: '終値',
 			highBid: '高値',
 			lowBid: '安値',
-		}
+		},
 	});
 	const writableStream = fs.createWriteStream('output.csv', {encoding: 'utf-8'});
 	stringifier.pipe(writableStream);
@@ -23,5 +25,6 @@ const fs = require('fs');
 	//stringifier.write(data);
 	data.forEach(d => stringifier.write(d));
 	//console.log(data);
-})();
+} )();
+
 
